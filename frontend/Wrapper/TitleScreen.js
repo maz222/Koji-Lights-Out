@@ -25,15 +25,15 @@ class TitleScreen extends React.Component {
         let pageColor = VCC.background.backgroundColor;
         let pageImage = VCC.background.backgroundImage;
         pageImage = pageImage == undefined ? "" : pageImage;
+        console.log(pageImage);
         let PageDiv = styled.div`
             height:100%;
             width:100%;
             display:flex;
             justify-content:center;
             background-size:cover;
+            background-image:url(${pageImage});
             background-color:${pageColor};
-            background-image:url${pageImage};
-            background-size: cover;
         `;
         let WrapperDiv = styled.div`
             width:${Math.min(window.innerWidth, 600)}px

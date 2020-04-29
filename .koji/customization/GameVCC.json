@@ -8,13 +8,14 @@
       "backgroundColor": "#1a87da"
     },
     "background": {
-      "backgroundColor": "#dcdcdc"
+      "backgroundColor": "#dcdcdc",
+      "backgroundImage": "https://images.koji-cdn.com/7dd3aa38-356b-46ba-bd2c-e69c91688895/khxsz-customGradient.png"
     },
     "levelClear": "https://objects.koji-cdn.com/5f0c77d6-8506-4efd-bbc3-732e65b1ec93/kjpu4-Errorbeepsoundeffect.mp3",
     "click": "https://objects.koji-cdn.com/8a481a29-cab7-4f1b-b68a-3190cdaa6e4e/userData/kblc1-zyBcRt.mp3",
     "music": "https://objects.koji-cdn.com/d090c1cc-1125-4240-9f9e-5b53d9a0fe35/t36uy-172561__djgriffin__videogame7.wav",
-    "gridWidth": 4,
-    "gridHeight": 4
+    "gridWidth": 3,
+    "gridHeight": 3
   },
   "@@editor": [
     {

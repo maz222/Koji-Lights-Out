@@ -15,7 +15,8 @@
       "backgroundColor": "#282626"
     },
     "background": {
-      "backgroundColor": "#dcdcdc"
+      "backgroundColor": "#dcdcdc",
+      "backgroundImage": "https://images.koji-cdn.com/7dd3aa38-356b-46ba-bd2c-e69c91688895/bafk7-customGradient.png"
     }
   },
   "@@editor": [

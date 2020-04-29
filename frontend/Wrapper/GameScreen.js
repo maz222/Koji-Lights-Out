@@ -129,7 +129,7 @@ class GameScreen extends React.Component {
             justify-content:space-between;
             flex-direction:column;
             background-color:${pageColor};
-            background-image:url${pageImage}
+            background-image:url(${pageImage});
             background-size: cover;
         `;
 
