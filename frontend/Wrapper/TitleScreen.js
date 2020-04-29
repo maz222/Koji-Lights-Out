@@ -33,6 +33,7 @@ class TitleScreen extends React.Component {
             background-size:cover;
             background-color:${pageColor};
             background-image:url${pageImage};
+            background-size: cover;
         `;
         let WrapperDiv = styled.div`
             width:${Math.min(window.innerWidth, 600)}px
@@ -83,13 +84,13 @@ class TitleScreen extends React.Component {
             width:calc(80% - 20px);
             padding:20px;
             border-radius:4px;
-            box-shadow: 0 0 0 4pt rgba(255,255,255,1);
+            box-shadow: 0 0 0 4pt rgba(20,20,20,1);
             border:1px solid rgba(0,0,0,.25);
             &:hover {
             	background-color:${playHoverColor};
             }
         `;
-        let PlayButton = <StyledPlayButton onClick={() => {this.props.audio.playAudio(2); window.setAppView("levelSelect")}}>{playText}</StyledPlayButton>;
+        let PlayButton = <StyledPlayButton onClick={() => {this.props.audio.playAudio(2); window.setAppView("game")}}>{playText}</StyledPlayButton>;
 
         let tutorialText = VCC.howToPlayButton.content;
         let tutorialColor = VCC.howToPlayButton.color;

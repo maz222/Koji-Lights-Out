@@ -3,7 +3,7 @@ import {Howl, Howler} from 'howler';
 
 class AudioManager {
 	constructor() {
-		const VCC = Koji.config.sounds;
+		const VCC = Koji.config.gameSettings;
 		this.files = [];
 		//load music [0]
 		if(VCC.music != undefined && VCC.music != "") {

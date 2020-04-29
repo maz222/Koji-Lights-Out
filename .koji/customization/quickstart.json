@@ -2,7 +2,10 @@
     "quickstart": {
         "items":[
             "titleScreen.title",
-            "levelSelect.gameLevels"
+            "gameSettings.gridWidth",
+            "gameSettings.gridHeight",
+            "gameSettings.activeColor",
+            "gameSettings.inactiveColor"
         ]
     }
 }

@@ -4,12 +4,8 @@ import Koji from '@withkoji/vcc';
 import WebFont from 'webfontloader';
 
 import TitleScreen from './TitleScreen.js';
-import LevelClearScreen from './LevelClearScreen.js';
-import LevelPage from './LevelSelectScreen.js';
-import GameScene from './GameScreen.js';
+import GameScreen from './GameScreen.js';
 import TutorialScreen from './TutorialScreen.js';
-
-import LevelFactory from './RandomLevelFactory.js';
 
 import AudioManager from './AudioManager.js';
 
@@ -54,27 +50,8 @@ class App extends PureComponent {
     if(this.state.view === 'title') {
       return(<TitleScreen audio={this.state.audio}/>);
     }
-    if(this.state.view === 'levelClear') {
-      return(<LevelClearScreen audio={this.state.audio}/>);
-    }
-    if(this.state.view === 'levelSelect') {
-        return(<LevelPage audio={this.state.audio}/>);
-    }
-    if(this.state.view === 'game') {
-        const VCC = Koji.config.levelSelect;
-        const LEVEL_ID = parseInt(localStorage.getItem('currentLevel'));
-        console.log(LEVEL_ID);
-        let level = null;
-        let title = null;
-        if(LEVEL_ID >= 0) {
-            level = VCC.gameLevels[LEVEL_ID].level;
-            title = VCC.gameLevels[LEVEL_ID].title;
-        }
-        else {
-            level = LevelFactory.build([(LEVEL_ID*-1)*5,(LEVEL_ID*-1)*5]);
-            title = "Random Level";
-        }
-        return(<GameScene level={level} title={title} audio={this.state.audio}/>);
+	if(this.state.view === 'game') {
+        return(<GameScreen width={Koji.config.gameSettings.gridWidth} height={Koji.config.gameSettings.gridHeight} audio={this.state.audio}/>);
     }
     if(this.state.view === 'tutorial') {
         return(<TutorialScreen audio={this.state.audio}/>)

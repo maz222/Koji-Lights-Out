@@ -1,0 +1,122 @@
+{
+  "gameSettings": {
+    "activeColor": "#1a87da",
+    "inactiveColor": "#f0f0f0",
+    "puzzleButton": {
+      "content": "New Puzzle",
+      "color": "#f7f1f1",
+      "backgroundColor": "#1a87da"
+    },
+    "background": {
+      "backgroundColor": "#dcdcdc"
+    },
+    "levelClear": "https://objects.koji-cdn.com/5f0c77d6-8506-4efd-bbc3-732e65b1ec93/kjpu4-Errorbeepsoundeffect.mp3",
+    "click": "https://objects.koji-cdn.com/8a481a29-cab7-4f1b-b68a-3190cdaa6e4e/userData/kblc1-zyBcRt.mp3",
+    "music": "https://objects.koji-cdn.com/d090c1cc-1125-4240-9f9e-5b53d9a0fe35/t36uy-172561__djgriffin__videogame7.wav",
+    "gridWidth": 4,
+    "gridHeight": 4
+  },
+  "@@editor": [
+    {
+      "key": "gameSettings",
+      "name": "2. Game Settings",
+      "icon": "🎮",
+      "source": "GameVCC.json",
+      "fields": [
+        {
+          "key": "gridWidth",
+          "name": "Grid Width",
+          "description": "The width of the playing grid",
+          "type": "range",
+          "typeOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 1
+          }
+        },
+        {
+          "key": "gridHeight",
+          "name": "Grid Height",
+          "description": "The height of the playing grid",
+          "type": "range",
+          "typeOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 1
+          }
+        },
+        {
+          "key": "activeColor",
+          "name": "Active Cell Color",
+          "description": "Color for active cells",
+          "type": "color"
+        },
+        {
+          "key": "inactiveColor",
+          "name": "Inactive Cell Color",
+          "description": "Color for inactive cells",
+          "type": "color"
+        },
+        {
+          "key": "puzzleButton",
+          "name": "New Puzzle Button",
+          "type": "object<Button>",
+          "typeOptions": {
+            "Button": {
+              "content": {
+                "name": "Button Text",
+                "type": "text"
+              },
+              "color": {
+                "name": "Text Color",
+                "type": "color"
+              },
+              "backgroundColor": {
+                "name": "Background Color",
+                "type": "color"
+              }
+            }
+          }
+        },
+        {
+          "key": "background",
+          "name": "Background",
+          "description": "The background for the page.",
+          "type": "object<Background>",
+          "typeOptions": {
+            "Background": {
+              "backgroundImage": {
+                "name": "Background Image",
+                "description": "A background image. Leave empty to use a solid color instead. (1680 x 1050 suggested size)",
+                "type": "image"
+              },
+              "backgroundColor": {
+                "name": "Background Color",
+                "description": "A solid background color.",
+                "type": "color"
+              }
+            }
+          }
+        },
+        {
+          "key": "music",
+          "name": "Background Music",
+          "description": "Background music for the game.",
+          "type": "sound"
+        },
+        {
+          "key": "levelClear",
+          "name": "Puzzle Solved",
+          "description": "Played when you successfully solve a puzzle",
+          "type": "sound"
+        },
+        {
+          "key": "click",
+          "name": "Click",
+          "description": "Generic click sound",
+          "type": "sound"
+        }
+      ]
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "titleScreen": {
     "title": {
-      "content": "Picross",
+      "content": "Lights Out",
       "color": "#161515"
     },
     "playButton": {
-      "content": "Puzzle Select",
+      "content": "Play",
       "color": "#f7f1f1",
       "backgroundColor": "#1a87da"
     },
@@ -50,7 +50,7 @@
         },
         {
           "key": "playButton",
-          "name": "Level Select Button",
+          "name": "Play Button",
           "type": "object<Button>",
           "typeOptions": {
             "Button": {
