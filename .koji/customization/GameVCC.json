@@ -1,21 +1,20 @@
 {
   "gameSettings": {
-    "activeColor": "#1a87da",
-    "inactiveColor": "#f0f0f0",
     "puzzleButton": {
       "content": "New Puzzle",
       "color": "#f7f1f1",
       "backgroundColor": "#1a87da"
     },
     "background": {
-      "backgroundColor": "#dcdcdc",
-      "backgroundImage": "https://images.koji-cdn.com/7dd3aa38-356b-46ba-bd2c-e69c91688895/khxsz-customGradient.png"
+      "backgroundColor": "#dcdcdc"
     },
     "levelClear": "https://objects.koji-cdn.com/5f0c77d6-8506-4efd-bbc3-732e65b1ec93/kjpu4-Errorbeepsoundeffect.mp3",
     "click": "https://objects.koji-cdn.com/8a481a29-cab7-4f1b-b68a-3190cdaa6e4e/userData/kblc1-zyBcRt.mp3",
     "music": "https://objects.koji-cdn.com/d090c1cc-1125-4240-9f9e-5b53d9a0fe35/t36uy-172561__djgriffin__videogame7.wav",
-    "gridWidth": 3,
-    "gridHeight": 3
+    "gridSize": 5,
+    "activeImage": "https://images.koji-cdn.com/34e4472f-2448-461f-9a0a-794a89d1a2d8/frnzt-02.png",
+    "inactiveImage": "https://images.koji-cdn.com/34e4472f-2448-461f-9a0a-794a89d1a2d8/8si0z-01.png",
+    "victoryImage": "https://images.koji-cdn.com/34e4472f-2448-461f-9a0a-794a89d1a2d8/y8k66-18.png"
   },
   "@@editor": [
     {
@@ -25,9 +24,9 @@
       "source": "GameVCC.json",
       "fields": [
         {
-          "key": "gridWidth",
-          "name": "Grid Width",
-          "description": "The width of the playing grid",
+          "key": "gridSize",
+          "name": "Game Size",
+          "description": "The size (n x n) of the playing grid",
           "type": "range",
           "typeOptions": {
             "min": 1,
@@ -36,27 +35,22 @@
           }
         },
         {
-          "key": "gridHeight",
-          "name": "Grid Height",
-          "description": "The height of the playing grid",
-          "type": "range",
-          "typeOptions": {
-            "min": 1,
-            "max": 10,
-            "step": 1
-          }
+          "key": "activeImage",
+          "name": "Active Cell Image",
+          "description": "Image for active cells (30x30 recommended size)",
+          "type": "image"
         },
         {
-          "key": "activeColor",
-          "name": "Active Cell Color",
-          "description": "Color for active cells",
-          "type": "color"
-        },
-        {
-          "key": "inactiveColor",
+          "key": "inactiveImage",
           "name": "Inactive Cell Color",
-          "description": "Color for inactive cells",
-          "type": "color"
+          "description": "Image for inactive cells (30x30 recommended size)",
+          "type": "image"
+        },
+        {
+          "key": "victoryImage",
+          "name": "Victory Image",
+          "description": "Image that moves across the screen when you solve a puzzle (200x200 reommended size)",
+          "type": "image"
         },
         {
           "key": "puzzleButton",

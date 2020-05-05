@@ -7,20 +7,24 @@ import hextoHSL from './UtilityFunctions.js'
 
 //change hover to slightly opaque 'light' image
 let DimCell = styled.div`
-	background-color:${Koji.config.gameSettings.inactiveColor};
+	background-color:rgb(240,240,240);
+	background-image:url("${Koji.config.gameSettings.inactiveImage}");
+	background-position:center;
+	background-size:cover;
 	width:100%;
 	height:100%;
 `;
 
 let LitCell = styled.div`
-	background-color:${Koji.config.gameSettings.activeColor};
+	background-color:rgb(240,240,240);
+	background-image:url("${Koji.config.gameSettings.activeImage}");
+	background-position:center;
+	background-size:cover;
 	width:100%;
 	height:100%;
 `;
 
 let BackButton = styled.button`
-	margin-top:40px;
-	left:20px;
     width:80px;
     height:80px;
     padding:10px;
@@ -36,6 +40,20 @@ let BackButton = styled.button`
     }
 `;
 
+let LevelCounter = styled.h1`
+    width:80px;
+    height:80px;
+    padding:10px;
+    border-radius:200px;
+    background-color:rgb(240,240,240);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:1px solid rgba(0,0,0,.20);
+    outline:0;
+    font-size:3em;
+`;
+
 let BackImage = styled.img`
     height:40px;
     width:auto;
@@ -48,7 +66,8 @@ class GameScreen extends React.Component {
 		//height - height of game grid
 	constructor(props) {
 		super(props);
-		this.state = {level:this.buildLevel(props.width,props.height),newGrid:true};
+		this.state = {newGrid:true,justToggled:[],justSolved:false,solvedCount:0};
+		this.state.level = this.buildLevel(props.width,props.height);
 	}
 	componentDidMount() {
 		this.props.audio.playAudio(0);
@@ -61,17 +80,22 @@ class GameScreen extends React.Component {
 	}
 	buildLevel(width,height) {
         let level = [];
+        let possibleCells = [];
 		for(let y=0;y<height;y++) {
 			level.push([]);
 			for(let x=0;x<width;x++) {
 				level[y].push(false);
+				possibleCells.push([y,x]);
 			}
-		}        
-		let numToggles = Math.max(1,Math.round(Math.random()*width*height*.25));
+		}     
+		let numToggles = this.state.solvedCount;
 		let toggles = [];
-		for(let i=0; i<numToggles; i++) {
-			let row = Math.round(Math.random() * (height-1));
-			let col = Math.round(Math.random() * (width-1));
+		while(toggles.length <= Math.min(numToggles,width*height)) {
+			let randIndex = Math.floor(Math.random() * Math.floor(possibleCells.length));
+			let cell = possibleCells[randIndex];
+			let row = cell[0];
+			let col = cell[1];
+			possibleCells.splice(randIndex,1);
 			toggles.push([row,col]);
 			let cells = [[row,col],[row+1,col],[row-1,col],[row,col+1],[row,col-1]];
 			for(var c in cells) {
@@ -80,32 +104,37 @@ class GameScreen extends React.Component {
 				}
 			}
 		}
-		console.log(toggles);
         //return [[false,true,false],[true,true,true],[false,true,false]];
         return level;
 	}
-	setNewLevel() {
+	setNewLevel(solved=false) {
 		this.state.level = this.buildLevel(this.props.width,this.props.height);
 		this.state.newGrid = true;
-		this.forceUpdate();	
+		this.setState({justToggled:[],justSolved:solved});
+		//this.forceUpdate();	
 	}
 	toggleCell(row,col) {
+		this.state.justSolved = false;
 		this.props.audio.playAudio(2);
 		this.state.newGrid = false;
-
+		this.state.justToggled = [];
 		let cells = [[row,col],[row+1,col],[row-1,col],[row,col+1],[row,col-1]];
 		for(var c in cells) {
 			if(this.checkBounds(cells[c][0],cells[c][1])) {
 				this.state.level[cells[c][0]][cells[c][1]] = !this.state.level[cells[c][0]][cells[c][1]];
+				this.state.justToggled.push([cells[c][0],cells[c][1]]);
 			}
 		}
 
 		//check if level is completed
 		if(this.checkLevel()) {
 			this.props.audio.playAudio(1);
-			this.setNewLevel();
+			this.state.solvedCount += 1;
+			this.setNewLevel(true);
+		} 
+		else {
+			this.forceUpdate();
 		}
-		this.forceUpdate();
 	}
 	checkLevel() {
 		for(var i in this.state.level) {
@@ -139,22 +168,34 @@ class GameScreen extends React.Component {
 		let cellBorderSize = gridSize/cellCount*.1;
 		let BorderLit = styled(LitCell)`
 			&:hover {
-				border:${cellBorderSize}px solid ${Koji.config.gameSettings.inactiveColor};
+				background-color:rgb(150,150,150);
 			}
 		`;
 		let BorderDim = styled(DimCell)`
 			&:hover {
-				border:${cellBorderSize}px solid ${Koji.config.gameSettings.activeColor};
+				background-color:rgb(150,150,150);
 			}
 		`;
+		let toggleKeyFrame = keyframes`
+			0% {
+				transform:scale(0);
+			}
+			100 % {
+                transform:scale(1);
+			}
+		`;
+		let ToggleDim = styled(BorderDim)`
+			animation:${toggleKeyFrame} .25s ease-in-out;
+		`
+		let ToggleLit = styled(BorderLit)`
+			animation:${toggleKeyFrame} .25s ease-in-out;
+		`
 		let gridKeyFrame = keyframes`
 			0% {
-				height:0px;
-				width:0px;
+                transform:scale(0);
 			}
 			100% {
-				width:${gridSize + 'px'}
-            	height:${gridSize + 'px'}
+                transform:scale(1);
 			}
 		`;
 		let Grid = styled.div`
@@ -170,6 +211,8 @@ class GameScreen extends React.Component {
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
             grid-gap:2px;
             background-color:black;
+            justify-items:center;
+            align-items:center;
 		`;
 		let AnimatedGrid = styled(Grid)`
 		    animation:${gridKeyFrame} .5s ease-in-out;
@@ -195,14 +238,62 @@ class GameScreen extends React.Component {
 			}
 		`;
 
+		let TopBar = styled.div`
+			width:${gridSize + 'px'};
+			margin-top:40px;
+			display:flex;
+			justify-content:space-around;
+		`;
+
+
+		const SPACING = window.innerWidth*.1;
+        const VICTORY_SIZE = Math.floor(window.innerWidth/3);
+        let VictoryKeyFrame = keyframes`
+			0% {
+				transform:translate(0px,0px) rotate(0deg);
+			}
+			100% {
+				transform:translate(0,${window.innerHeight + VICTORY_SIZE*2}px) rotate(359deg);
+			}
+		`;
+		let VictoryImage = styled.img`
+			width:${VICTORY_SIZE - SPACING}px;
+			height:auto;
+			position:fixed;
+			animation:${VictoryKeyFrame} 1s linear;
+			top:-${Math.floor(window.innerWidth/3)}px;
+		`;
+		let victoryImages = [];
+		if(this.state.justSolved) {
+			for(let i=0;i<VICTORY_SIZE+1;i++) {
+				victoryImages.push(i*VICTORY_SIZE + SPACING/2*(i));
+			}
+		}
+
 		return(
             <PageDiv>
-            <BackButton onClick={() => {this.props.audio.playAudio(2); window.setAppView("title")}}><BackImage src={Koji.config.general.backButton.buttonImage} /></BackButton>
+            <TopBar>
+            	<BackButton onClick={() => {this.props.audio.playAudio(2); window.setAppView("title")}}><BackImage src={Koji.config.general.backButton.buttonImage} /></BackButton>
+            	<LevelCounter>{this.state.solvedCount}</LevelCounter>
+            </TopBar>
                 <GameGrid>
                 {
                     this.state.level.map((row,rowIndex) => {
                         return(
                             row.map((isCellLit,cellIndex) => {
+                            	let toggled = false;
+                            	for(var i in this.state.justToggled) {
+                            		if(this.state.justToggled[i][0] == rowIndex && this.state.justToggled[i][1] == cellIndex) {
+                            			toggled = true;
+                            			break;
+                            		}
+                            	}
+                            	if(isCellLit && toggled) {
+                            		return(<ToggleLit onClick = {() => this.toggleCell(rowIndex,cellIndex)}/>);
+                            	}
+                            	if(!isCellLit && toggled) {
+                            		return(<ToggleDim onClick = {() => this.toggleCell(rowIndex,cellIndex)}/>);
+                            	}
                                 return(isCellLit ? <BorderLit onClick={() => this.toggleCell(rowIndex,cellIndex)}/> : <BorderDim onClick={() => this.toggleCell(rowIndex,cellIndex)}/>);
                             })
                         )
@@ -210,6 +301,11 @@ class GameScreen extends React.Component {
                 }
                 </GameGrid>
                 <NewPuzzleButton onClick={() => this.setNewLevel()}>{Koji.config.gameSettings.puzzleButton.content}</NewPuzzleButton>
+                {
+                	victoryImages.map((leftPos,index) => {
+                		return(<VictoryImage style={{left:leftPos}} src={Koji.config.gameSettings.victoryImage}/>);
+                	})
+                }
             </PageDiv>
 		);
 	}

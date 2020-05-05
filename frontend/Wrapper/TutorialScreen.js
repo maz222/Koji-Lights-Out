@@ -28,15 +28,21 @@ let BackImage = styled.img`
 `;
 
 let DimCell = styled.div`
-	background-color:${Koji.config.gameSettings.inactiveColor};
+	background-color:rgb(240,240,240);
+	background-image:url("${Koji.config.gameSettings.inactiveImage}");
+	background-position:center;
+	background-size:cover;
 	width:100%;
 	height:100%;
 `;
 
 let LitCell = styled.div`
-	background-color:${Koji.config.gameSettings.activeColor};
+	background-color:rgb(240,240,240);
+	background-image:url("${Koji.config.gameSettings.activeImage}");
+	background-position:center;
+	background-size:cover;
 	width:100%;
-	height:100%;}
+	height:100%;
 `;
 
 let TargetKeyFrames = keyframes`
@@ -50,9 +56,7 @@ let TargetKeyFrames = keyframes`
 	}
 `;
 
-let TargetIndicator = styled.div`
-	border-radius:200px;
-	background-color:rgba(255,255,255,.5);
+let TargetIndicator = styled.img`
 	animation:${TargetKeyFrames} .75s ease-in alternate infinite;
 `;
 
@@ -70,7 +74,7 @@ let CheckButton = styled.div`
 `;
 
 let ActiveCheck = styled(CheckButton)`
-	background-color:${Koji.config.gameSettings.activeColor};
+    background-color:rgb(20,255,20);
 	border:1px solid rgba(0,0,0,.2);
     color:white;
 `;
@@ -108,12 +112,12 @@ class TutorialScreen extends React.Component {
 		`;
         let cellBorderSize = gridSize/cellCount*.1;
 		let TargetLit = styled(LitCell)`
+			background-image:url();
             display:flex;
             justify-content:center;
             align-items:center;
 			&:hover {
-                cursor:pointer;
-				border:${cellBorderSize}px solid ${Koji.config.gameSettings.inactiveColor};
+				background-color:rgb(150,150,150);
 			}
 		`;
 		let cells = this.state.completed ? [[0,0,0],[0,0,0],[0,0,0]] : [[0,1,0],[1,2,1],[0,1,0]];
@@ -131,7 +135,7 @@ class TutorialScreen extends React.Component {
                             		case 1:
                             			return <LitCell />;
                             		case 2:
-                            			return <TargetLit onClick={() => {this.props.audio.playAudio(2); this.props.audio.playAudio(1); this.setState({completed:true})}}><TargetIndicator/></TargetLit>
+                            			return <TargetLit onClick={() => {this.props.audio.playAudio(2); this.props.audio.playAudio(1); this.setState({completed:true})}}><TargetIndicator src={Koji.config.gameSettings.activeImage}/></TargetLit>
                             	}
                             })
                         )

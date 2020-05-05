@@ -72,51 +72,6 @@
           "key": "fontFamily",
           "name": "Font",
           "type": "custom<jims-google-font-vcc>"
-        },
-        {
-          "key": "soundButton",
-          "name": "Sound Button",
-          "description": "Button for enabling/disabling sounds.",
-          "type": "object<ToggleButton>",
-          "typeOptions": {
-            "ToggleButton": {
-              "backgroundColor": {
-                "name": "Background Color",
-                "description": "Background color for the button",
-                "type": "color"
-              },
-              "onImage": {
-                "name": "On Image",
-                "description": "Image for the when sound is enabled. (50x50 recommended size)",
-                "type": "image"
-              },
-              "offImage": {
-                "name": "Off Image",
-                "description": "Image for when the sound is disabled. (50x50 recommended size)",
-                "type": "image"
-              }
-            }
-          }
-        },
-        {
-          "key": "backButton",
-          "name": "Back Button",
-          "description": "Back Button",
-          "type": "object<Button>",
-          "typeOptions": {
-            "Button": {
-              "backgroundColor": {
-                "name": "Background Color",
-                "description": "Background color for the button",
-                "type": "color"
-              },
-              "buttonImage": {
-                "name": "Image",
-                "description": "Image for the button. (50x50 recommended size)",
-                "type": "image"
-              }
-            }
-          }
         }
       ]
     }

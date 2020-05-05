@@ -51,7 +51,7 @@ class App extends PureComponent {
       return(<TitleScreen audio={this.state.audio}/>);
     }
 	if(this.state.view === 'game') {
-        return(<GameScreen width={Koji.config.gameSettings.gridWidth} height={Koji.config.gameSettings.gridHeight} audio={this.state.audio}/>);
+        return(<GameScreen width={Koji.config.gameSettings.gridSize} height={Koji.config.gameSettings.gridSize} audio={this.state.audio}/>);
     }
     if(this.state.view === 'tutorial') {
         return(<TutorialScreen audio={this.state.audio}/>)
