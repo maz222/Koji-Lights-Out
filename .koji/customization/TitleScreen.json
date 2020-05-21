@@ -2,8 +2,7 @@
   "titleScreen": {
     "title": {
       "content": "Lights Out",
-      "color": "#161515",
-      "logo": ""
+      "color": "#161515"
     },
     "playButton": {
       "content": "Play Game",

@@ -2,10 +2,10 @@
     "quickstart": {
         "items":[
             "titleScreen.title",
-            "gameSettings.gridWidth",
-            "gameSettings.gridHeight",
-            "gameSettings.activeColor",
-            "gameSettings.inactiveColor"
+            "gameSettings.gridSize",
+            "gameSettings.activeImage",
+            "gameSettings.inactiveImage",
+            "gameSettings.victoryImage"
         ]
     }
 }

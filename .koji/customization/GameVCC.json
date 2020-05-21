@@ -42,7 +42,7 @@
         },
         {
           "key": "inactiveImage",
-          "name": "Inactive Cell Color",
+          "name": "Inactive Cell Image",
           "description": "Image for inactive cells (30x30 recommended size)",
           "type": "image"
         },

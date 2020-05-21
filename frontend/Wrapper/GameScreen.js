@@ -7,19 +7,19 @@ import hextoHSL from './UtilityFunctions.js'
 
 //change hover to slightly opaque 'light' image
 let DimCell = styled.div`
-	background-color:rgb(240,240,240);
-	background-image:url("${Koji.config.gameSettings.inactiveImage}");
+	background-color:rgb(20,20,20);
 	background-position:center;
-	background-size:cover;
+	background-size:contain;
+	background-repeat:no-repeat;
 	width:100%;
 	height:100%;
 `;
 
 let LitCell = styled.div`
 	background-color:rgb(240,240,240);
-	background-image:url("${Koji.config.gameSettings.activeImage}");
 	background-position:center;
-	background-size:cover;
+	background-size:contain;
+	background-repeat:no-repeat;
 	width:100%;
 	height:100%;
 `;
@@ -167,11 +167,13 @@ class GameScreen extends React.Component {
 
 		let cellBorderSize = gridSize/cellCount*.1;
 		let BorderLit = styled(LitCell)`
+			background-image:url(${this.props.active});
 			&:hover {
 				background-color:rgb(150,150,150);
 			}
 		`;
 		let BorderDim = styled(DimCell)`
+			background-image:url(${this.props.inactive});
 			&:hover {
 				background-color:rgb(150,150,150);
 			}
@@ -303,7 +305,7 @@ class GameScreen extends React.Component {
                 <NewPuzzleButton onClick={() => this.setNewLevel()}>{Koji.config.gameSettings.puzzleButton.content}</NewPuzzleButton>
                 {
                 	victoryImages.map((leftPos,index) => {
-                		return(<VictoryImage style={{left:leftPos}} src={Koji.config.gameSettings.victoryImage}/>);
+                		return(<VictoryImage style={{left:leftPos}} src={this.props.victory}/>);
                 	})
                 }
             </PageDiv>
